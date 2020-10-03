@@ -251,10 +251,8 @@ IE: 123456789"""
 
 
 def test_valida_observacao():
-    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_NULA)
-    == TEXTO_ESPERADO_SEM_OBSERVACAO
-    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_VAZIA)
-    == TEXTO_ESPERADO_SEM_OBSERVACAO
+    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_NULA) == TEXTO_ESPERADO_SEM_OBSERVACAO
+    assert cupom.dados_loja_objeto(LOJA_OBSERVACAO_VAZIA) == TEXTO_ESPERADO_SEM_OBSERVACAO
 
 
 LOJA_CNPJ_NULO = cupom.Loja(NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO,
@@ -302,11 +300,10 @@ IE: 123456789'''
 
 
 def test_valida_numero_e_complemento():
-    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO)
-    == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO
+    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO) == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO
 
 
-LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO = Loja(NOME_LOJA, LOGRADOURO, None,
+LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO = cupom.Loja(NOME_LOJA, LOGRADOURO, None,
                                                   None, None, MUNICIPIO,
                                                   ESTADO, CEP, TELEFONE,
                                                   OBSERVACAO, CNPJ,
@@ -322,30 +319,34 @@ IE: 123456789'''
 
 
 def test_valida_numero_complemento_e_bairro():
-    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO)
-    == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO
+    assert cupom.dados_loja_objeto(LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO) == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO
 
 
 def test_exercicio2_customizado():
 
     # Defina seus próprios valores para as variáveis a seguir
-    nome_loja = ""
-    logradouro = ""
-    numero = 0
+    nome_loja = "LOJAS AMERICANAS S.A."
+    logradouro = "R SACADURA CABRAL"
+    numero = 102
     complemento = ""
-    bairro = ""
-    municipio = ""
-    estado = ""
-    cep = ""
-    telefone = ""
-    observacao = ""
-    cnpj = ""
-    inscricao_estadual = ""
+    bairro = "GAMBOA"
+    municipio = "RIO DE JANEIRO"
+    estado = "RJ"
+    cep = "20.221-160"
+    telefone = "(21) 2206-6708"
+    observacao = "47.11-3-02 Comercio varejista de mercadorias em geral"
+    cnpj = "33.014.556/0001-96"
+    inscricao_estadual = "85.687.08-5"
 
     lojaCustomizada = cupom.Loja(nome_loja, logradouro, numero, complemento,
                                  bairro, municipio, estado, cep, telefone,
                                  observacao, cnpj, inscricao_estadual)
 
     # E atualize o texto esperado abaixo
-    assert (cupom.dados_loja_objeto(lojaCustomizada) == """
-""")
+    assert (cupom.dados_loja_objeto(lojaCustomizada) == """LOJAS AMERICANAS S.A.
+R SACADURA CABRAL, 102
+GAMBOA - RIO DE JANEIRO - RJ
+CEP:20.221-160 Tel (21) 2206-6708
+47.11-3-02 Comercio varejista de mercadorias em geral
+CNPJ: 33.014.556/0001-96
+IE: 85.687.08-5""")
